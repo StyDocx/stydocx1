@@ -20,374 +20,293 @@
                 <li class="tab" onclick="changeTab(5)">Question 6</li>
                 <li class="tab" onclick="changeTab(6)">Question 7</li>
                 <li class="tab" onclick="changeTab(7)">Question 8</li>
-                <li class="tab" onclick="changeTab(8)">Question 9</li>
-                <li class="tab" onclick="changeTab(9)">Question 10</li>
-                <li class="tab" onclick="changeTab(10)">Question 11</li>
-                <li class="tab" onclick="changeTab(11)">Question 12</li>
-                <li class="tab" onclick="changeTab(12)">Question 13</li>
-                <li class="tab" onclick="changeTab(13)">Question 14</li>
-                <li class="tab" onclick="changeTab(14)">Question 15</li>
+               
             </ul>
         </div>
 
         <div class="tab-content">
             <!-- Tab content with Python editor -->
             <div class="tab-panel active">
-                <h2>Question 1: 1. Create a program for recursive and non-recursive algorithms and examine the order of growth from log2n to n!.</h2>
+                <h2>Question 1: Perform the following:
+
+A. Create database
+
+B. Create employee tables (with constraints).
+
+C. Create a view for each table
+
+D. Perform Insert/delete/update operations..</h2>
                 <textarea id="code-editor-1" class="code-editor">
-def factorial(n):
-    if n == 0:
-        return 1
-    else:
-        return n * factorial(n - 1)
-def linear_search(arr, target):
-    x=[i for i,j in enumerate(arr) if j==target]
-    return x[0]
-print(factorial(5))  # Output: 120
-print(linear_search([1, 2, 5, 4, 3], 3))  # Output: 4
+
+CREATE DATABASE CompanyDB;
+USE CompanyDB;
+CREATE TABLE Employee (
+EmployeeID INT PRIMARY KEY,FirstName VARCHAR(50) NOT NULL,LastName VARCHAR(50) NOT NULL,
+Email VARCHAR(100) UNIQUE,HireDate DATE,Salary DECIMAL(10, 2),DepartmentID INT);
+CREATE VIEW EmployeeView AS SELECT EmployeeID, FirstName, LastName, Email, HireDate, Salary FROM Employee;
+INSERT INTO Employee (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
+VALUES (1, 'John', 'Doe', 'john.doe@example.com', '2024-01-15', 50000.00, 101);
+INSERT INTO Employee (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
+VALUES (2, 'John day', 'Dosa', 'john.dosa@example.com', '2024-01-19', 8000.00, 108);
+UPDATE Employee SET Salary = 55000.00 WHERE EmployeeID = 1;
+DELETE FROM Employee WHERE EmployeeID = 1;
+select * from Employee;
+    
 </textarea>
                 <button onclick="runCode(0)">Run Code</button>
                 <pre id="output-1" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 2: 2. Write a program using Divide and Conquer Strassen's Matrix Multiplication to multiply the two square matrices A and B, each of size n x n..</h2>
+                <h2>Question 2: Create a employee table and perform the following operations
+
+A. Create a query to display first name and joining date of each employee in the order they joined.
+
+B. Display the employee records whose salary is above 25000.
+
+C. Create a query to display the name of the employee whose salary is not in the range of 10000 and 50000..</h2>
                 <textarea id="code-editor-2" class="code-editor">
-import numpy as np
 
-# Define the matrices A and B (4x4 with padding already applied)
-A = np.array([
-    [1, 2, 3, 0],
-    [3, 4, 5, 0],
-    [5, 4, 3, 0],
-    [0, 0, 0, 0]
-])
-
-B = np.array([
-    [2, 2, 3, 0],
-    [1, 4, 5, 0],
-    [6, 4, 3, 0],
-    [0, 0, 0, 0]
-])
-
-# Function to compute Strassen's products for 4x4 matrices
-def strassen_simple(A, B):
-    # Divide matrices into 2x2 quadrants
-    A11, A12, A21, A22 = A[:2, :2], A[:2, 2:], A[2:, :2], A[2:, 2:]
-    B11, B12, B21, B22 = B[:2, :2], B[:2, 2:], B[2:, :2], B[2:, 2:]
-
-    # Compute the 7 products (no recursion)
-    P1 = np.dot(A11 + A22, B11 + B22)
-    P2 = np.dot(A21 + A22, B11)
-    P3 = np.dot(A11, B12 - B22)
-    P4 = np.dot(A22, B21 - B11)
-    P5 = np.dot(A11 + A12, B22)
-    P6 = np.dot(A21 - A11, B11 + B12)
-    P7 = np.dot(A12 - A22, B21 + B22)
-
-    # Combine results into quadrants of the resultant matrix
-    C11 = P1 + P4 - P5 + P7
-    C12 = P3 + P5
-    C21 = P2 + P4
-    C22 = P1 + P3 - P2 + P6
-
-    # Assemble the 4x4 result matrix
-    C = np.zeros((4, 4))
-    C[:2, :2] = C11
-    C[:2, 2:] = C12
-    C[2:, :2] = C21
-    C[2:, 2:] = C22
-
-    return C
-
-# Compute the product
-result = strassen_simple(A, B)
-
-# Display the result
-print("Resultant Matrix:")
-print(result)
+create database db2;
+use db2;
+CREATE TABLE employee (
+    employee_id INT PRIMARY KEY,first_name VARCHAR(100),last_name VARCHAR(100),
+    salary DECIMAL(10, 2),joining_date DATE );
+INSERT INTO employee (employee_id, first_name, last_name, salary, joining_date)
+VALUES 
+(1, 'John', 'Doe', 35000.00, '2023-06-15'),
+(2, 'Jane', 'Smith', 55000.00, '2022-11-20'),
+(3, 'Mike', 'Johnson', 22000.00, '2023-03-12'),
+(6, 'Sarah', 'Miller', 10000.00, '2020-05-01');
+SELECT first_name, joining_date FROM employee ORDER BY joining_date;
+SELECT * FROM employee WHERE salary > 25000;
+SELECT first_name FROM employee WHERE salary NOT BETWEEN 10000 AND 50000;
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 3: To solve the following topological sorting problem, develop a code based on the DFS method..</h2>
-                <textarea id="code-editor-2" class="code-editor">
-graph = {
-    'a': ['b', 'e'],
-    'b': ['c'],
-    'd': ['a', 'b', 'c', 'e', 'g'],
-    'e': ['g', 'f'],
-    'g': ['c', 'f']
-}
-def dfs(node, visited):
-    print(node, end=" ")  # Print the current node
-    visited.add(node)  # Mark node as visited
-    for neighbor in graph.get(node, []):
-        if neighbor not in visited:
-            dfs(neighbor, visited)
+                <h2>Question 3: Create a database as College and tables as student, teacher and management etc…
 
-visited = set()
-for node in graph:
-    if node not in visited:
-        dfs(node, visited)
+Perform all then DCL and TCL functions..</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+CREATE DATABASE College;
+USE College;
+CREATE TABLE student (
+    student_id INT PRIMARY KEY,first_name VARCHAR(100),last_name VARCHAR(100),
+    date_of_birth DATE,grade VARCHAR(5)
+);
+CREATE TABLE teacher (
+    teacher_id INT PRIMARY KEY,
+    first_name VARCHAR(100),last_name VARCHAR(100),
+    subject VARCHAR(100),hire_date DATE
+);
+CREATE TABLE management (
+    management_id INT PRIMARY KEY,name VARCHAR(100),
+    position VARCHAR(100),start_date DATE
+);
+INSERT INTO student (student_id, first_name, last_name, date_of_birth, grade)
+VALUES 
+(1, 'John', 'Doe', '2000-05-15', 'A'),
+(2, 'Jane', 'Smith', '1999-08-22', 'B'),
+(3, 'Mike', 'Johnson', '2001-02-10', 'C');
+INSERT INTO teacher (teacher_id, first_name, last_name, subject, hire_date)
+VALUES 
+(1, 'Emily', 'Davis', 'Math', '2020-03-01'),
+(2, 'David', 'Wilson', 'Science', '2019-11-20');
+INSERT INTO management (management_id, name, position, start_date)
+VALUES 
+(1, 'Alice', 'Principal', '2015-07-01'),
+(2, 'Bob', 'Vice Principal', '2017-09-15');
+GRANT SELECT ON student TO 'root'@'localhost';
+REVOKE SELECT ON student FROM 'root'@'localhost';
+COMMIT;
+ROLLBACK;
+SAVEPOINT sp1;
+
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 4: Given coins of denominations 1, 2, 4 and 5 with amount to be bay is 8. Create a program to find optimal number of coins and sequence of coins used to pay the given amount using dynamic programming method..</h2>
-                <textarea id="code-editor-2" class="code-editor">
-def min_coins(coins, amount):
-    dp = [float('inf')] * (amount + 1)
-    dp[0] = 0
-    for i in range(1, amount + 1):
-        dp[i] = min(dp[i - c] + 1 for c in coins if i - c >= 0)
-    return dp[amount], [c for c in coins if dp[amount] == dp[amount - c] + 1]
+                <h2>Question 4: GCreate tables for a customer applying for bank loan (employee, customer and loan).
 
-coins = [1, 2, 4, 5]
-amount = 8
-min_coins_needed, coin_sequence = min_coins(coins, amount)
-print(f"Minimum coins needed: {min_coins_needed}")
-print(f"Coin sequence: {coin_sequence}")
+A. View the customer names whose account opening date from 01.06.2018 to till now.
+
+B. View the details of a customer whose loan amount is greater than 100000 in Coimbatore branch.
+
+C. Create a view for customer table in order to prevent modification..</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+CREATE DATABASE db4;
+USE db4;
+CREATE TABLE Employee (
+    EmployeeID INT PRIMARY KEY,FirstName VARCHAR(100),
+    LastName VARCHAR(100),Position VARCHAR(100),Branch VARCHAR(100));
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY,FirstName VARCHAR(100),LastName VARCHAR(100),
+    AccountOpeningDate DATE,Address VARCHAR(255),Branch VARCHAR(100));
+CREATE TABLE Loan (
+    LoanID INT PRIMARY KEY,CustomerID INT, -- No foreign key constraint here
+    LoanAmount DECIMAL(15, 2),LoanDate DATE,Branch VARCHAR(100));
+INSERT INTO Employee (EmployeeID, FirstName, LastName, Position, Branch) 
+VALUES (1, 'John', 'Doe', 'Loan Officer', 'Coimbatore'),
+(2, 'Jane', 'Smith', 'Branch Manager', 'Coimbatore'),
+(3, 'Alice', 'Johnson', 'Loan Officer', 'Chennai');
+INSERT INTO Customer (CustomerID, FirstName, LastName, AccountOpeningDate, Address, Branch) 
+VALUES (1, 'Raj', 'Kumar', '2019-05-10', '1234, ABC Street, Coimbatore', 'Coimbatore'),
+(3, 'Vijay', 'Singh', '2018-02-25', '2345, DEF Lane, Chennai', 'Chennai'),
+(4, 'Ananya', 'Sharma', '2022-08-15', '9876, GHI Avenue, Coimbatore', 'Coimbatore');
+INSERT INTO Loan (LoanID, CustomerID, LoanAmount, LoanDate, Branch) 
+VALUES (1, 1, 150000, '2023-06-15', 'Coimbatore'),
+(2, 2, 50000, '2023-07-20', 'Coimbatore'),
+(4, 4, 200000, '2023-08-01', 'Coimbatore');
+SELECT FirstName, LastName FROM Customer 
+WHERE AccountOpeningDate BETWEEN '2018-06-01' AND CURDATE();
+SELECT c.CustomerID, c.FirstName, c.LastName, l.LoanAmount, l.LoanDate, l.Branch 
+FROM Customer c JOIN Loan l ON c.CustomerID = l.CustomerID 
+WHERE l.LoanAmount > 100000 AND l.Branch = 'Coimbatore';
+CREATE VIEW ViewCustomer AS 
+SELECT CustomerID, FirstName, LastName, AccountOpeningDate, Address, Branch 
+FROM Customer;
+SELECT * FROM ViewCustomer;
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 5: Write a program to discover the transitive closure of the digraph specified in the following adjacency matrix using Warshall's algorithm.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-def transitive_closure(G):
-    n = len(G)
-    for k in range(n):
-        for i in range(n):
-            for j in range(n):
-                G[i][j] |= G[i][k] & G[k][j]  # In-place update
-    return G
+                <h2>Question 5:Create a trigger for new employee.
 
-G = [[0, 1, 1, 1],
-     [1, 0, 1, 1],
-     [1, 1, 0, 1],
-     [1, 1, 1, 0]]
-for row in transitive_closure(G):
-    print(row)
+• Insert an new employee to the employee relation
+
+• Check the emp_no of the new employee tuple is not null or not.
+
+• If it is not null, update the department relation with newly inserted employee by adding their salary to the total salary attribute to the concern department.</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+CREATE DATABASE EmployeeDB;
+USE EmployeeDB;
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(50) NOT NULL,LastName VARCHAR(50),DepartmentID INT,
+    Salary DECIMAL(10, 2) CHECK (Salary > 0),HireDate DATE);
+CREATE TABLE IF NOT EXISTS Departments (
+    DepartmentID INT PRIMARY KEY,DepartmentName VARCHAR(100) NOT NULL UNIQUE,
+    TotalSalary DECIMAL(15, 2) DEFAULT 0.00);
+DELIMITER $$
+CREATE TRIGGER AfterInsertEmployee
+AFTER INSERT ON Employees
+FOR EACH ROW
+BEGIN
+    IF NEW.EmployeeID IS NOT NULL THEN
+        UPDATE Departments
+        SET TotalSalary = TotalSalary + NEW.Salary
+        WHERE DepartmentID = NEW.DepartmentID;
+    END IF;
+END$$
+DELIMITER ;
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (1, 'Engineering');
+INSERT INTO Employees (FirstName, LastName, DepartmentID, Salary) VALUES ('John', 'Doe', 1, 75000.00);
+SELECT * FROM Employees;
+SELECT * FROM Departments;
+
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 6: Write a program to discover the transitive closure of the digraph specified in the following adjacency matrix using Warshall's algorithm [[0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 0, 1], [1, 0, 0, 0]].</h2>
+                <h2>Question 6:Create a procedure for incrementing rupees 2000 for those with experience less than 5 years and 5000 for rest of all employees in an organization which uses employee table.</h2>
                 <textarea id="code-editor-2" class="code-editor">
-def transitive_closure(G):
-    n = len(G)
-    for k in range(n):
-        for i in range(n):
-            for j in range(n):
-                G[i][j] |= G[i][k] & G[k][j]  # In-place update
-    return G
 
-G = [[0, 1, 1, 0],
-     [0, 0, 1, 0],
-     [0, 0, 0, 1],
-     [1, 0, 0, 0]]
-for row in transitive_closure(G):
-    print(row)
+CREATE DATABASE db6;
+USE db6;
+CREATE TABLE employee ( employee_id INT PRIMARY KEY,first_name VARCHAR(100),
+last_name VARCHAR(100),salary DECIMAL(15, 2),experience_years INT);
+INSERT INTO employee (employee_id, first_name, last_name, salary, experience_years)
+VALUES (1, 'John', 'Doe', 30000, 3),
+(2, 'Jane', 'Smith', 50000, 6),
+(4, 'Bob', 'Lee', 60000, 8);
+DELIMITER $$
+CREATE PROCEDURE IncrementSalary()
+BEGIN
+    UPDATE employee
+    SET salary = salary + IF(experience_years < 5, 2000, 5000) WHERE employee_id > 0;
+END$$
+DELIMITER ;
+CALL IncrementSalary();
+SELECT * FROM employee;
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 7:Write a program to find the shortest path between every pair of vertices of a graph using Floyd’s Algo.</h2>
+                <h2>Question 7:Create a procedure for customers who deposits and withdraw amount from the banking systems.</h2>
                 <textarea id="code-editor-2" class="code-editor">
-def floyd_warshall(graph):
-    n = len(graph)
-    dist = [row[:] for row in graph]  # Initialize distance matrix
-    for k in range(n):
-        for i in range(n):
-            for j in range(n):
-                if dist[i][j] == 0: dist[i][j] = float('inf')  # Handle no path case
-                if dist[i][k] + dist[k][j] < dist[i][j]:
-                    dist[i][j] = dist[i][k] + dist[k][j]
-    return [[0 if dist[i][j] == float('inf') else dist[i][j] for j in range(n)] for i in range(n)]
-graph = [
-    [0, 5, 0, 0, 10, 0],
-    [0, 0, 7, 12, 0, 0],
-    [0, 0, 0, 8, 0, 0],
-    [3, 0, 0, 0, 9, 6],
-    [0, 0, 0, 0, 0, 20],
-    [0, 0, 15, 0, 0, 0]
-]
-shortest_paths = floyd_warshall(graph)
-for row in shortest_paths:
-    print(row)
+
+CREATE DATABASE db7;
+USE db7;
+CREATE TABLE  Customer (
+    CustomerID INT PRIMARY KEY,FirstName VARCHAR(100),
+    LastName VARCHAR(100),AccountBalance DECIMAL(15, 2) DEFAULT 0.00);
+INSERT INTO Customer (CustomerID, FirstName, LastName, AccountBalance) 
+VALUES (1, 'Raj', 'Kumar', 5000.00),
+(2, 'Vijay', 'Singh', 3000.00),
+(3, 'Ananya', 'Sharma', 10000.00);
+DELIMITER $$
+CREATE PROCEDURE ManageTransaction(
+    IN custID INT,IN transType VARCHAR(10),IN amount DECIMAL(15, 2))
+BEGIN
+    IF transType = 'Deposit' THEN
+        UPDATE Customer SET AccountBalance = AccountBalance + amount
+        WHERE CustomerID = custID;
+    ELSEIF transType = 'Withdraw' THEN
+        UPDATE Customer SET AccountBalance = AccountBalance - amount
+        WHERE CustomerID = custID AND AccountBalance >= amount;
+    END IF;
+END $$
+DELIMITER ;
+CALL ManageTransaction(1, 'Deposit', 1500.00);
+CALL ManageTransaction(2, 'Withdraw', 1000.00);
+CALL ManageTransaction(2, 'Withdraw', 5000.00);
+CALL ManageTransaction(3, 'Deposit', 2000.00);
+select * from customer;
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 8: 10. Create a program for the given instance of problem to obtain the optimal solution for the knapsack problem using Dynamic Programming..</h2>
+                <h2>Question 8: Creating a function for calculating net salary for all employees in an organization using an employee table.</h2>
                 <textarea id="code-editor-2" class="code-editor">
-def knapsack(w, p, W):
-    dp = [0] * (W+1)
-    for i in range(len(w)):
-        for j in range(W, w[i]-1, -1):
-            dp[j] = max(dp[j], dp[j-w[i]]+p[i])
-    return dp[-1]
-print(knapsack([2,3,4,5],[3, 4, 5,6], 5))
+
+create database db8;
+use db8;
+CREATE TABLE Employee (
+    EmployeeID INT PRIMARY KEY,FirstName VARCHAR(100),
+    LastName VARCHAR(100),BasicSalary DECIMAL(15, 2),
+    Bonus DECIMAL(15, 2),Deductions DECIMAL(15, 2),Allowances DECIMAL(15, 2));
+INSERT INTO Employee (EmployeeID, FirstName, LastName, BasicSalary, Bonus, Deductions, Allowances)
+VALUES (1, 'John', 'Doe', 50000, 5000, 2000, 3000),  -- Employee 1
+(2, 'Jane', 'Smith', 60000, 4000, 1500, 3500),  -- Employee 2
+(3, 'Alice', 'Johnson', 55000, 3000, 1000, 2500);  -- Employee 3
+DELIMITER $$
+CREATE FUNCTION CalculateNetSalary(empID INT) 
+RETURNS DECIMAL(15, 2)
+DETERMINISTIC
+BEGIN
+    DECLARE netSalary DECIMAL(15, 2);
+    SELECT 
+        (BasicSalary + Bonus - Deductions + Allowances) INTO netSalary
+    FROM Employee
+    WHERE EmployeeID = empID;
+    RETURN netSalary;
+END $$
+DELIMITER ;
+SELECT CalculateNetSalary(1);
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
-            <div class="tab-panel">
-                <h2>Question 9:Write a program to solve the following knapsack instance using Dynamic Programming. N=3, [w1,w2,w3]=[1.2.2] and [p1,p2,p3]=[18,16,6] and Capacity W=4.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-def knapsack(w, p, W):
-    dp = [0] * (W+1)
-    for i in range(len(w)):
-        for j in range(W, w[i]-1, -1):
-            dp[j] = max(dp[j], dp[j-w[i]]+p[i])
-    return dp[-1]
-print(knapsack([1, 2, 2], [18, 16, 6], 4))
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 10: Create a program using Greedy Technique for finding a shortest path from one node to another node in the following graph using Dijkstra’s algorithm..</h2>
-                <textarea id="code-editor-2" class="code-editor">
-import heapq
-
-def dijkstra(graph, start):
-    n = len(graph)
-    dist = [float('inf')] * n
-    dist[start] = 0
-    pq = [(0, start)]
-
-    while pq:
-        d, u = heapq.heappop(pq)
-        if d > dist[u]: continue
-        for v, w in enumerate(graph[u]):
-            if w and dist[u] + w < dist[v]:
-                dist[v] = dist[u] + w
-                heapq.heappush(pq, (dist[v], v))
-
-    return dist
-
-graph = [
-    [0, 6, 0, 0, 0, 0, 0, 9, 0],
-    [6, 0, 8, 0, 0, 0, 0, 11, 0],
-    [0, 8, 0, 7, 0, 4, 0, 0, 2],
-    [0, 0, 7, 0, 9, 14, 0, 0, 0],
-    [0, 0, 0, 9, 0, 10, 0, 0, 0],
-    [0, 0, 4, 14, 10, 0, 2, 0, 0],
-    [0, 0, 0, 0, 0, 2, 0, 1, 6],
-    [9, 11, 0, 0, 0, 0, 1, 0, 7],
-    [0, 0, 2, 0, 0, 0, 6, 7, 0]
-]
-
-distances = dijkstra(graph, 0)
-
-for i, d in enumerate(distances):
-    print(f"0 -> {i}: {d}")
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 11: Create a program using Greedy Techniques to Construct the Huffman’s Tree & code for the following data.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-import heapq
-
-freq = [('A', 0.1), ('B', 0.5), ('C', 0.35), ('D', 0.5), ('E', 0.4), ('-', 0.2)]
-heap = [[w, s] for s, w in freq]
-heapq.heapify(heap)
-
-while len(heap) > 1:
-    a, b = heapq.heappop(heap), heapq.heappop(heap)
-    heapq.heappush(heap, [a[0] + b[0], [a, b]])
-
-def get_codes(node, code=""):
-    return {node[1]: code} if isinstance(node[1], str) else {**get_codes(node[1][0], code + "0"), **get_codes(node[1][1], code + "1")}
-
-codes = get_codes(heap[0])
-print(codes)
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 12:Create a program to solve the following Farmers problem using simplex method.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-from scipy.optimize import linprog
-c = [-63, -90]
-A,b = [[110, 40], [60, 110]], [20200, 30000]
-result = linprog(c, A_ub=A, b_ub=b, bounds=[(0, None), (0, None)], method='simplex')
-print(f"Acres of corn: {result.x[0]:.2f} 
- Soybeans: {result.x[1]:.2f}
- Profit: {-result.fun:.2f}") # put $ before {}
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 13: Create a program for N-Queen (5 Queen) problem using Backtracking.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-def solve(board=None, row=0, n=8):
-    if board is None:
-        board = [-1] * n  # Initialize the board with -1 for empty positions
-    if row == n: 
-        print(board)
-        return True  # Stop recursion after finding the first solution
-    for col in range(n):
-        if all(board[r] != col and abs(r - row) != abs(board[r] - col) for r in range(row)):
-            board[row] = col
-            if solve(board, row + 1, n): return True  # Found a solution, return True
-solve(n=5)  # Example for n=4
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 14: There are 5 distinct numbers {1,2,5,6,8}. Find the combinations of these numbers such that sum is 9. Write a code using backtracking method to arrive at the solution.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-def comb(nums, target, i=0, current=[]):
-    if target == 0: print(current)
-    for j in range(i, len(nums)):
-        if nums[j] <= target: comb(nums, target-nums[j], j+1, current+[nums[j]])
-comb([1, 2, 5, 6, 8], 9)
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 15: Create a program to solve the following tsp using branch and bound method.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-from itertools import permutations
-graph = [
-    [0, 1, 3, float('inf')],
-    [1, 0, 8, 5],
-    [3, 8, 0, 2],
-    [float('inf'), 5, 2, 0]
-]
-n = len(graph)
-def tsp(graph):
-    nodes = list(range(n))
-    min_cost = float('inf')
-    for perm in permutations(nodes[1:]):
-        route = [0] + list(perm) + [0]
-        cost = 0
-        for i in range(len(route) - 1):
-            cost += graph[route[i]][route[i + 1]]
-            if cost >= min_cost:
-                break
-        min_cost = min(min_cost, cost)
-    return min_cost
-result = tsp(graph)
-print(f"The minimum cost of the TSP is: {result}")
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <!-- Add 13 more tab-panels for other questions here -->
+            
         </div>
     </div>
 
