@@ -20,6 +20,10 @@
                 <li class="tab" onclick="changeTab(5)">Question 6</li>
                 <li class="tab" onclick="changeTab(6)">Question 7</li>
                 <li class="tab" onclick="changeTab(7)">Question 8</li>
+                <li class="tab" onclick="changeTab(8)">Question 9</li>
+                <li class="tab" onclick="changeTab(9)">Question 10</li>
+                <li class="tab" onclick="changeTab(10)">Question 11</li>
+                <li class="tab" onclick="changeTab(11)">Question 12</li>
                
             </ul>
         </div>
@@ -27,281 +31,285 @@
         <div class="tab-content">
             <!-- Tab content with Python editor -->
             <div class="tab-panel active">
-                <h2>Question 1: Perform the following:
-
-A. Create database
-
-B. Create employee tables (with constraints).
-
-C. Create a view for each table
-
-D. Perform Insert/delete/update operations..</h2>
+                <h2>Question 1:a)Write a NumPy program to convert a list and tuple into arraysb)Write a NumPy program to convert the values of Centigrade degrees into Fahrenheit degrees and vice versa. Values have to be stored into a NumPy array..</h2>
                 <textarea id="code-editor-1" class="code-editor">
 
-CREATE DATABASE CompanyDB;
-USE CompanyDB;
-CREATE TABLE Employee (
-EmployeeID INT PRIMARY KEY,FirstName VARCHAR(50) NOT NULL,LastName VARCHAR(50) NOT NULL,
-Email VARCHAR(100) UNIQUE,HireDate DATE,Salary DECIMAL(10, 2),DepartmentID INT);
-CREATE VIEW EmployeeView AS SELECT EmployeeID, FirstName, LastName, Email, HireDate, Salary FROM Employee;
-INSERT INTO Employee (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
-VALUES (1, 'John', 'Doe', 'john.doe@example.com', '2024-01-15', 50000.00, 101);
-INSERT INTO Employee (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
-VALUES (2, 'John day', 'Dosa', 'john.dosa@example.com', '2024-01-19', 8000.00, 108);
-UPDATE Employee SET Salary = 55000.00 WHERE EmployeeID = 1;
-DELETE FROM Employee WHERE EmployeeID = 1;
-select * from Employee;
-    
+import numpy as np
+my_list = [1, 2, 3, 4, 5]
+my_tuple = (6, 7, 8, 9, 10)
+array_from_list = np.array(my_list)
+array_from_tuple = np.array(my_tuple)
+print("Array from list:", array_from_list)
+print("Array from tuple:", array_from_tuple)
+
+import numpy as np
+centigrade_temps = np.array([0, 20, 37, 100])
+fahrenheit_temps = (centigrade_temps * 9/5) + 32
+print("Centigrade to Fahrenheit:", fahrenheit_temps)
+converted_back_to_centigrade = (fahrenheit_temps - 32) * 5/9
+print("Fahrenheit back to Centigrade:", converted_back_to_centigrade)
+
+
 </textarea>
                 <button onclick="runCode(0)">Run Code</button>
                 <pre id="output-1" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 2: Create a employee table and perform the following operations
-
-A. Create a query to display first name and joining date of each employee in the order they joined.
-
-B. Display the employee records whose salary is above 25000.
-
-C. Create a query to display the name of the employee whose salary is not in the range of 10000 and 50000..</h2>
+                <h2>Question 2:a)Write a NumPy program to find the real and imaginary parts of an array of complex numbers.b)Write a NumPy program to convert a NumPy array into a csv file</h2>
                 <textarea id="code-editor-2" class="code-editor">
 
-create database db2;
-use db2;
-CREATE TABLE employee (
-    employee_id INT PRIMARY KEY,first_name VARCHAR(100),last_name VARCHAR(100),
-    salary DECIMAL(10, 2),joining_date DATE );
-INSERT INTO employee (employee_id, first_name, last_name, salary, joining_date)
-VALUES 
-(1, 'John', 'Doe', 35000.00, '2023-06-15'),
-(2, 'Jane', 'Smith', 55000.00, '2022-11-20'),
-(3, 'Mike', 'Johnson', 22000.00, '2023-03-12'),
-(6, 'Sarah', 'Miller', 10000.00, '2020-05-01');
-SELECT first_name, joining_date FROM employee ORDER BY joining_date;
-SELECT * FROM employee WHERE salary > 25000;
-SELECT first_name FROM employee WHERE salary NOT BETWEEN 10000 AND 50000;
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 3: Create a database as College and tables as student, teacher and management etc…
+import numpy as np
+complex_array = np.array([1+2j, 3-4j, 5+6j, 7-8j])
+real_parts = np.real(complex_array)
+imaginary_parts = np.imag(complex_array)
+print("Complex Array:", complex_array)
+print("Real Parts:", real_parts)
+print("Imaginary Parts:", imaginary_parts)
 
-Perform all then DCL and TCL functions..</h2>
-                <textarea id="code-editor-2" class="code-editor">
 
-CREATE DATABASE College;
-USE College;
-CREATE TABLE student (
-    student_id INT PRIMARY KEY,first_name VARCHAR(100),last_name VARCHAR(100),
-    date_of_birth DATE,grade VARCHAR(5)
-);
-CREATE TABLE teacher (
-    teacher_id INT PRIMARY KEY,
-    first_name VARCHAR(100),last_name VARCHAR(100),
-    subject VARCHAR(100),hire_date DATE
-);
-CREATE TABLE management (
-    management_id INT PRIMARY KEY,name VARCHAR(100),
-    position VARCHAR(100),start_date DATE
-);
-INSERT INTO student (student_id, first_name, last_name, date_of_birth, grade)
-VALUES 
-(1, 'John', 'Doe', '2000-05-15', 'A'),
-(2, 'Jane', 'Smith', '1999-08-22', 'B'),
-(3, 'Mike', 'Johnson', '2001-02-10', 'C');
-INSERT INTO teacher (teacher_id, first_name, last_name, subject, hire_date)
-VALUES 
-(1, 'Emily', 'Davis', 'Math', '2020-03-01'),
-(2, 'David', 'Wilson', 'Science', '2019-11-20');
-INSERT INTO management (management_id, name, position, start_date)
-VALUES 
-(1, 'Alice', 'Principal', '2015-07-01'),
-(2, 'Bob', 'Vice Principal', '2017-09-15');
-GRANT SELECT ON student TO 'root'@'localhost';
-REVOKE SELECT ON student FROM 'root'@'localhost';
-COMMIT;
-ROLLBACK;
-SAVEPOINT sp1;
+import numpy as np
+array_data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+csv_filename = "array_data.csv"
+np.savetxt(csv_filename, array_data, delimiter=',', fmt='%d')
+print(f"Array saved to {csv_filename}")
 
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 4: GCreate tables for a customer applying for bank loan (employee, customer and loan).
-
-A. View the customer names whose account opening date from 01.06.2018 to till now.
-
-B. View the details of a customer whose loan amount is greater than 100000 in Coimbatore branch.
-
-C. Create a view for customer table in order to prevent modification..</h2>
+                <h2>Question 3:a)Write a NumPy program to perform the basic arithmetic operations.b)Write a NumPy program to transpose an array</h2>
                 <textarea id="code-editor-2" class="code-editor">
 
-CREATE DATABASE db4;
-USE db4;
-CREATE TABLE Employee (
-    EmployeeID INT PRIMARY KEY,FirstName VARCHAR(100),
-    LastName VARCHAR(100),Position VARCHAR(100),Branch VARCHAR(100));
-CREATE TABLE Customer (
-    CustomerID INT PRIMARY KEY,FirstName VARCHAR(100),LastName VARCHAR(100),
-    AccountOpeningDate DATE,Address VARCHAR(255),Branch VARCHAR(100));
-CREATE TABLE Loan (
-    LoanID INT PRIMARY KEY,CustomerID INT, -- No foreign key constraint here
-    LoanAmount DECIMAL(15, 2),LoanDate DATE,Branch VARCHAR(100));
-INSERT INTO Employee (EmployeeID, FirstName, LastName, Position, Branch) 
-VALUES (1, 'John', 'Doe', 'Loan Officer', 'Coimbatore'),
-(2, 'Jane', 'Smith', 'Branch Manager', 'Coimbatore'),
-(3, 'Alice', 'Johnson', 'Loan Officer', 'Chennai');
-INSERT INTO Customer (CustomerID, FirstName, LastName, AccountOpeningDate, Address, Branch) 
-VALUES (1, 'Raj', 'Kumar', '2019-05-10', '1234, ABC Street, Coimbatore', 'Coimbatore'),
-(3, 'Vijay', 'Singh', '2018-02-25', '2345, DEF Lane, Chennai', 'Chennai'),
-(4, 'Ananya', 'Sharma', '2022-08-15', '9876, GHI Avenue, Coimbatore', 'Coimbatore');
-INSERT INTO Loan (LoanID, CustomerID, LoanAmount, LoanDate, Branch) 
-VALUES (1, 1, 150000, '2023-06-15', 'Coimbatore'),
-(2, 2, 50000, '2023-07-20', 'Coimbatore'),
-(4, 4, 200000, '2023-08-01', 'Coimbatore');
-SELECT FirstName, LastName FROM Customer 
-WHERE AccountOpeningDate BETWEEN '2018-06-01' AND CURDATE();
-SELECT c.CustomerID, c.FirstName, c.LastName, l.LoanAmount, l.LoanDate, l.Branch 
-FROM Customer c JOIN Loan l ON c.CustomerID = l.CustomerID 
-WHERE l.LoanAmount > 100000 AND l.Branch = 'Coimbatore';
-CREATE VIEW ViewCustomer AS 
-SELECT CustomerID, FirstName, LastName, AccountOpeningDate, Address, Branch 
-FROM Customer;
-SELECT * FROM ViewCustomer;
-</textarea>
-                <button onclick="runCode(1)">Run Code</button>
-                <pre id="output-2" class="output"></pre>
-            </div>
-            <div class="tab-panel">
-                <h2>Question 5:Create a trigger for new employee.
+import numpy as np
+array1 = np.array([1, 2, 3, 4])
+array2 = np.array([5, 6, 7, 8])
+addition = np.add(array1, array2)
+subtraction = np.subtract(array1, array2)
+multiplication = np.multiply(array1, array2)
+division = np.divide(array1, array2)
+print("Array1:", array1)
+print("Array2:", array2)
+print("Addition:", addition)
+print("Subtraction:", subtraction)
+print("Multiplication:", multiplication)
+print("Division:", division)
 
-• Insert an new employee to the employee relation
 
-• Check the emp_no of the new employee tuple is not null or not.
+import numpy as np
+array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+transposed_array = np.transpose(array)
+print("Original Array:")
+print(array)
+print("\nTransposed Array:")
+print(transposed_array)
 
-• If it is not null, update the department relation with newly inserted employee by adding their salary to the total salary attribute to the concern department.</h2>
-                <textarea id="code-editor-2" class="code-editor">
-
-CREATE DATABASE EmployeeDB;
-USE EmployeeDB;
-CREATE TABLE Employees (
-    EmployeeID INT PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(50) NOT NULL,LastName VARCHAR(50),DepartmentID INT,
-    Salary DECIMAL(10, 2) CHECK (Salary > 0),HireDate DATE);
-CREATE TABLE IF NOT EXISTS Departments (
-    DepartmentID INT PRIMARY KEY,DepartmentName VARCHAR(100) NOT NULL UNIQUE,
-    TotalSalary DECIMAL(15, 2) DEFAULT 0.00);
-DELIMITER $$
-CREATE TRIGGER AfterInsertEmployee
-AFTER INSERT ON Employees
-FOR EACH ROW
-BEGIN
-    IF NEW.EmployeeID IS NOT NULL THEN
-        UPDATE Departments
-        SET TotalSalary = TotalSalary + NEW.Salary
-        WHERE DepartmentID = NEW.DepartmentID;
-    END IF;
-END$$
-DELIMITER ;
-INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (1, 'Engineering');
-INSERT INTO Employees (FirstName, LastName, DepartmentID, Salary) VALUES ('John', 'Doe', 1, 75000.00);
-SELECT * FROM Employees;
-SELECT * FROM Departments;
 
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 6:Create a procedure for incrementing rupees 2000 for those with experience less than 5 years and 5000 for rest of all employees in an organization which uses employee table.</h2>
+                <h2>Question 4: a)Use NumPy , Create an array with 5 dimensions and verify that it has 5 dimensions.b)Using NumPy, Sort a boolean array</h2>
                 <textarea id="code-editor-2" class="code-editor">
 
-CREATE DATABASE db6;
-USE db6;
-CREATE TABLE employee ( employee_id INT PRIMARY KEY,first_name VARCHAR(100),
-last_name VARCHAR(100),salary DECIMAL(15, 2),experience_years INT);
-INSERT INTO employee (employee_id, first_name, last_name, salary, experience_years)
-VALUES (1, 'John', 'Doe', 30000, 3),
-(2, 'Jane', 'Smith', 50000, 6),
-(4, 'Bob', 'Lee', 60000, 8);
-DELIMITER $$
-CREATE PROCEDURE IncrementSalary()
-BEGIN
-    UPDATE employee
-    SET salary = salary + IF(experience_years < 5, 2000, 5000) WHERE employee_id > 0;
-END$$
-DELIMITER ;
-CALL IncrementSalary();
-SELECT * FROM employee;
+import numpy as np
+array_5d = np.ones((2, 2, 2, 2, 2))
+print("Array with 5 dimensions:", array_5d)
+print("Number of dimensions:", array_5d.ndim)
+
+                    
+import numpy as np
+boolean_array = np.array([True, False, True, False, True])
+sorted_boolean_array = np.sort(boolean_array)
+print("Original Boolean Array:", boolean_array)
+print("Sorted Boolean Array:", sorted_boolean_array)
+
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 7:Create a procedure for customers who deposits and withdraw amount from the banking systems.</h2>
+                <h2>Question 5:a)Create your own simple Pandas DataFrame and print its values b)Create your own DataFrame from dict of array/list</h2>
                 <textarea id="code-editor-2" class="code-editor">
 
-CREATE DATABASE db7;
-USE db7;
-CREATE TABLE  Customer (
-    CustomerID INT PRIMARY KEY,FirstName VARCHAR(100),
-    LastName VARCHAR(100),AccountBalance DECIMAL(15, 2) DEFAULT 0.00);
-INSERT INTO Customer (CustomerID, FirstName, LastName, AccountBalance) 
-VALUES (1, 'Raj', 'Kumar', 5000.00),
-(2, 'Vijay', 'Singh', 3000.00),
-(3, 'Ananya', 'Sharma', 10000.00);
-DELIMITER $$
-CREATE PROCEDURE ManageTransaction(
-    IN custID INT,IN transType VARCHAR(10),IN amount DECIMAL(15, 2))
-BEGIN
-    IF transType = 'Deposit' THEN
-        UPDATE Customer SET AccountBalance = AccountBalance + amount
-        WHERE CustomerID = custID;
-    ELSEIF transType = 'Withdraw' THEN
-        UPDATE Customer SET AccountBalance = AccountBalance - amount
-        WHERE CustomerID = custID AND AccountBalance >= amount;
-    END IF;
-END $$
-DELIMITER ;
-CALL ManageTransaction(1, 'Deposit', 1500.00);
-CALL ManageTransaction(2, 'Withdraw', 1000.00);
-CALL ManageTransaction(2, 'Withdraw', 5000.00);
-CALL ManageTransaction(3, 'Deposit', 2000.00);
-select * from customer;
+import pandas as pd
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+    'City': ['New York', 'Los Angeles', 'Chicago']
+}
+
+simple_df = pd.DataFrame(data)
+print("Simple DataFrame:")
+print(simple_df)
+
+
+import numpy as np
+data_dict = {
+    'A': np.array([1, 2, 3, 4]),
+    'B': np.array([5, 6, 7, 8]),
+    'C': [9, 10, 11, 12]
+}
+dict_df = pd.DataFrame(data_dict)
+print("\nDataFrame from dictionary of ndarrays/lists:")
+print(dict_df)
+
+
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
             </div>
             <div class="tab-panel">
-                <h2>Question 8: Creating a function for calculating net salary for all employees in an organization using an employee table.</h2>
+                <h2>Question 6:Perform appending, slicing, addition and deletion of rows with a Pandas DataFrame.</h2>
                 <textarea id="code-editor-2" class="code-editor">
 
-create database db8;
-use db8;
-CREATE TABLE Employee (
-    EmployeeID INT PRIMARY KEY,FirstName VARCHAR(100),
-    LastName VARCHAR(100),BasicSalary DECIMAL(15, 2),
-    Bonus DECIMAL(15, 2),Deductions DECIMAL(15, 2),Allowances DECIMAL(15, 2));
-INSERT INTO Employee (EmployeeID, FirstName, LastName, BasicSalary, Bonus, Deductions, Allowances)
-VALUES (1, 'John', 'Doe', 50000, 5000, 2000, 3000),  -- Employee 1
-(2, 'Jane', 'Smith', 60000, 4000, 1500, 3500),  -- Employee 2
-(3, 'Alice', 'Johnson', 55000, 3000, 1000, 2500);  -- Employee 3
-DELIMITER $$
-CREATE FUNCTION CalculateNetSalary(empID INT) 
-RETURNS DECIMAL(15, 2)
-DETERMINISTIC
-BEGIN
-    DECLARE netSalary DECIMAL(15, 2);
-    SELECT 
-        (BasicSalary + Bonus - Deductions + Allowances) INTO netSalary
-    FROM Employee
-    WHERE EmployeeID = empID;
-    RETURN netSalary;
-END $$
-DELIMITER ;
-SELECT CalculateNetSalary(1);
+import pandas as pd
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+    'City': ['New York', 'Los Angeles', 'Chicago']
+}
+df = pd.DataFrame(data)
+print("Original DataFrame:")
+print(df)
+new_row = {'Name': 'David', 'Age': 28, 'City': 'San Francisco'}
+df = df.append(new_row, ignore_index=True)
+print("\nDataFrame after appending a new row:")
+print(df)
+sliced_df = df.iloc[:2]
+print("\nSlicedDataFrame (first two rows):")
+print(sliced_df)
+df.loc[4] = ['Eve', 29, 'Seattle']
+print("\nDataFrame after adding a new row:")
+print(df)
+df = df.drop(1)
+print("\nDataFrame after deleting the second row:")
+print(df)
+
+</textarea>
+                <button onclick="runCode(1)">Run Code</button>
+                <pre id="output-2" class="output"></pre>
+            </div>
+            <div class="tab-panel">
+                <h2>Question 7:Using Pandas, Create a DataFrame with a list of dictionaries, row indices, and column indices..</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+data_dict = [
+    {'Name': 'Alice', 'Age': 25, 'City': 'New York'},
+    {'Name': 'Bob', 'Age': 30, 'City': 'Los Angeles'},
+    {'Name': 'Charlie', 'Age': 35, 'City': 'Chicago'}
+]
+df_with_indices = pd.DataFrame(data_dict, index=['row1', 'row2', 'row3'], columns=['Name', 'Age', 'City'])
+print("\nDataFrame with specified row and column indices:")
+print(df_with_indices)
+
+</textarea>
+                <button onclick="runCode(1)">Run Code</button>
+                <pre id="output-2" class="output"></pre>
+            </div>
+            <div class="tab-panel">
+                <h2>Question 8: Apply and explore various plotting functions on UCI data sets</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+iris = sns.load_dataset("iris")
+sns.pairplot(iris, hue="species")
+plt.show()
+sns.boxplot(x="species", y="sepal_length", data=iris)
+plt.show()
+corr = iris.corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+plt.show()
+
+</textarea>
+                <button onclick="runCode(1)">Run Code</button>
+                <pre id="output-2" class="output"></pre>
+            </div>
+            <div class="tab-panel">
+                <h2>Question 9:Use the diabetes data set from Pima Indians Diabetes , Perform Bivariate analysis</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+diabetes = pd.read_csv('https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv', header=None)
+diabetes.columns = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
+sns.pairplot(diabetes, hue='Outcome')
+plt.show()
+sns.scatterplot(x='Glucose', y='Insulin', hue='Outcome', data=diabetes)
+plt.show()	
+
+</textarea>
+                <button onclick="runCode(1)">Run Code</button>
+                <pre id="output-2" class="output"></pre>
+            </div>
+            <div class="tab-panel">
+                <h2>Question 10:Using the “concrete strength” dataset, explore relationships between two continuous variables with Scatterplots.</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+concrete = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/concrete/compressive/Concrete_Data.xls')
+sns.scatterplot(x='Cement', y='Compressive Strength', data=concrete)
+plt.show()
+sns.pairplot(concrete)
+plt.show()
+
+
+</textarea>
+                <button onclick="runCode(1)">Run Code</button>
+                <pre id="output-2" class="output"></pre>
+            </div>
+            <div class="tab-panel">
+                <h2>Question 11:Make a three-dimensional plot with randomly generate 50 data points for x, y, and z. Set the point color as red, and size of the point as 50..</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+np.random.seed(0)
+x = np.random.rand(50)
+y = np.random.rand(50)
+z = np.random.rand(50)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(x, y, z, c='r', marker='o', s=50)
+ax.set_xlabel('X Label')
+ax.set_ylabel('Y Label')
+ax.set_zlabel('Z Label')
+plt.show()
+
+
+</textarea>
+                <button onclick="runCode(1)">Run Code</button>
+                <pre id="output-2" class="output"></pre>
+            </div>
+            <div class="tab-panel">
+                <h2>Question 12:How will you plot and visualize geographical data with the help of Basemap. State the Procedure for it with an example .</h2>
+                <textarea id="code-editor-2" class="code-editor">
+
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+import numpy as np
+map = Basemap(projection='mill', llcrnrlat=-60, urcrnrlat=90,
+llcrnrlon=-180, urcrnrlon=180, resolution='c')
+map.drawcoastlines()
+map.drawcountries()
+map.drawparallels(np.arange(-90., 91., 30.), labels=[True, False, False, False])
+map.drawmeridians(np.arange(-180., 181., 60.), labels=[False, False, False, True])
+num_points = 100
+latitudes = np.random.uniform(-60, 90, num_points)
+longitudes = np.random.uniform(-180, 180, num_points)
+x, y = map(longitudes, latitudes)
+map.scatter(x, y, marker='o', color='r')
+plt.title('Random Points on World Map')
+plt.show()
+
+
 </textarea>
                 <button onclick="runCode(1)">Run Code</button>
                 <pre id="output-2" class="output"></pre>
